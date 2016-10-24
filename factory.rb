@@ -14,6 +14,16 @@ class Factory
           instance_variable_set("@#{k}", v)
         end
       end
+
+      def [](arg)
+        if  arg.is_a? Fixnum
+          inst = instance_variables[arg]
+        else
+          inst = "@#{arg}"
+        end
+        instance_variable_get inst
+      end
+
       class_eval(&block) if block_given?
     end
   end
